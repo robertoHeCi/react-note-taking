@@ -15,6 +15,14 @@ export default {
         text: '#111827', // Example text color
         // Add more colors as needed
       },
+      boxShadow: {
+        'drop-shadow': 'filter drop-shadow(0 0 2em #646cffaa)',
+      },
+      backgroundColor: {
+        'light': '#EBFAFE',
+        'white': '#FFFFFF',
+        'dark': '#000000',
+      },
     },
   },
   plugins: [],

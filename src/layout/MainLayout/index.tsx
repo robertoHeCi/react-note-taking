@@ -1,11 +1,13 @@
-import ThemeToggle from '@/components/ThemeToggle';
 import { Outlet } from 'react-router-dom';
+import Header from '../Header';
 
 const MainLayout = () => {
   return (
     <main className="bg-primary dark:bg-black dark:text-white min-h-screen">
-      <ThemeToggle />
-      <Outlet />
+      <Header />
+      <div className="bg-white dark:bg-dark">
+        <Outlet />
+      </div>
     </main>
   );
 }

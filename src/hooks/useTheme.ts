@@ -6,7 +6,7 @@ const useTheme = () => {
   const DARK_CLASS = 'dark';
   const LIGHT_CLASS = 'light';
 
-  const [theme, setTheme] = useState(LIGHT_CLASS);
+  const [theme, setTheme] = useState(DARK_CLASS);
 
   const toggleTheme = () => {
     document.documentElement.classList.toggle(DARK_CLASS);

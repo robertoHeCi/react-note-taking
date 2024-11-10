@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color-light: theme('backgroundColor.light');
+  --bg-color-dark: theme('backgroundColor.dark');
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
   max-width: 1920px;
-  width: 100vw;
   margin: 0 auto;
+  background-color: var(--bg-color-light);
 }
 
+html.dark body {
+  background-color: var(--bg-color-dark);
+}
