@@ -2,7 +2,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   return (
-    <nav className="w-full bg-white dark:bg-gray-800 p-4">
+    <nav className="w-full bg-white dark:bg-gray-800 p-4 drop-shadow-md">
       <div className="flex flex-wrap items-center justify-between mx-auto p-2">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="images/logo.webp" className="h-6 drop-shadow" alt="Surfe Logo" />

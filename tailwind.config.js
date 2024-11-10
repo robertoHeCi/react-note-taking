@@ -17,6 +17,13 @@ export default {
       },
       boxShadow: {
         'drop-shadow': 'filter drop-shadow(0 0 2em #646cffaa)',
+        'custom-drop-shadow': '0 0 2em rgba(100, 108, 255, 0.67)', // Custom drop shadow
+
+      },
+      filter: {
+        'brightness-125': 'brightness(1.25)',
+        'drop-shadow': 'drop-shadow(0 0 2em #646cffaa)',
+        'custom-drop-shadow': 'drop-shadow(0 0 2em rgba(100, 108, 255, 0.67))', // Custom drop shadow
       },
       backgroundColor: {
         'light': '#EBFAFE',
