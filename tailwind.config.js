@@ -13,7 +13,6 @@ module.exports = {
         accent: '#F472B6',
         background: '#F9FAFB',
         text: '#111827',
-        // Add more colors as needed
       },
       boxShadow: {
         'drop-shadow': 'filter drop-shadow(0 0 2em #646cffaa)',
