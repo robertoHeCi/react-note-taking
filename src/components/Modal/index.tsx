@@ -1,4 +1,6 @@
-const Modal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void }) => {
+import { NoteType } from "@/hooks/useNote";
+
+const Modal = ({ isOpen, setIsOpen, noteToDisplay }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void, noteToDisplay: NoteType | null }) => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -16,7 +18,7 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boo
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Sample Modal
+                  Note type: {noteToDisplay?.type}
                 </h3>
                 <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal" onClick={toggleModal}>
                   <svg className="w-3 h-3" aria-hidden={isOpen ? 'true' : 'false'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -27,10 +29,7 @@ const Modal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boo
               </div>
               <div className="p-4 md:p-5 space-y-4">
                 <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                </p>
-                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                  {noteToDisplay?.content}
                 </p>
               </div>
               <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
