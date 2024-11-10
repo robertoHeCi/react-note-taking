@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,28 +8,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#EBFAFE', // Example primary color
-        secondary: '#FBBF24', // Example secondary color
-        accent: '#F472B6', // Example accent color
-        background: '#F9FAFB', // Example background color
-        text: '#111827', // Example text color
+        primary: '#EBFAFE',
+        secondary: '#FBBF24',
+        accent: '#F472B6',
+        background: '#F9FAFB',
+        text: '#111827',
         // Add more colors as needed
       },
       boxShadow: {
         'drop-shadow': 'filter drop-shadow(0 0 2em #646cffaa)',
-        'custom-drop-shadow': '0 0 2em rgba(100, 108, 255, 0.67)', // Custom drop shadow
-
       },
       filter: {
         'brightness-125': 'brightness(1.25)',
         'drop-shadow': 'drop-shadow(0 0 2em #646cffaa)',
-        'custom-drop-shadow': 'drop-shadow(0 0 2em rgba(100, 108, 255, 0.67))', // Custom drop shadow
       },
       backgroundColor: {
         'light': '#EBFAFE',
-        'white': '#FFFFFF',
         'dark': '#000000',
       },
+      keyframes: {
+        'slide-up': {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' }
+        }
+      },
+      animation: {
+        'slide-up': 'slide-up 0.5s ease-out'
+      }
     },
   },
   plugins: [],
