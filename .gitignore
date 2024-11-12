@@ -25,3 +25,4 @@ tsconfig.node.tsbuildinfo
 *.sw?
 data/extracted/14-29-05_data_data.txt
 .vercel
+.env
