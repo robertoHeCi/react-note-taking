@@ -1,5 +1,5 @@
 import Modal from "@/components/Modal";
-import Note from "@/components/Note";
+import TextNote from "@/components/TextNote";
 import Toolbar from "@/components/Toolbar";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { useModal } from "@/hooks/useModal";
@@ -14,14 +14,23 @@ const HomePage = () => {
     setNoteToDisplayByType(type);
     setIsModalOpen(!isModalOpen);
   }
+
+  const isValidJson = (str: { body: string, [key: string]: string }) => {
+    try {
+      JSON.parse(str.body);
+      return true;
+    } catch {
+      return false;
+    }
+  };
   
   return (
     <div className="flex flex-col items-center justify-start h-screen pt-5">
       <Toolbar handleClick={handleClick} />
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen} noteToDisplay={noteToDisplay} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
-        {notes?.map((note: { body: string }) => (
-          <Note body={note.body} />
+        {notes?.filter(isValidJson)?.map((note: { body: string }) => (
+          <TextNote body={note.body} />
         ))}
       </div>
     </div>
