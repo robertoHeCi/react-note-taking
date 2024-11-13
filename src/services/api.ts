@@ -1,4 +1,4 @@
-import { checkResponse, handleApiError } from '@/utils/error/errorHandler';
+import { checkResponse, handleApiError } from "@/utils/error/errorHandler";
 
 export const apiService = {
   getNotes: async () => {
@@ -7,13 +7,15 @@ export const apiService = {
       await checkResponse(response);
       return response.json();
     } catch (error) {
-      handleApiError(error, 'Failed to fetch notes');
+      handleApiError(error, "Failed to fetch notes");
     }
   },
 
   getNoteById: async (id: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/notes/${id}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/notes/${id}`
+      );
       await checkResponse(response);
       return response.json();
     } catch (error) {
@@ -21,17 +23,22 @@ export const apiService = {
     }
   },
 
-  createNote: async (noteData: unknown) => {
+  createNote: async (noteData: { [key: string]: string }) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/notes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(noteData),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          body: JSON.stringify({
+            ...noteData,
+            "updatedAt": new Date().toISOString()
+          })
+        })
       });
       await checkResponse(response);
       return response.json();
     } catch (error) {
-      handleApiError(error, 'Failed to create note');
+      handleApiError(error, "Failed to create note");
     }
-  },
-}; 
+  }
+};
