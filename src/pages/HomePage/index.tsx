@@ -29,8 +29,8 @@ const HomePage = () => {
       <Toolbar handleClick={handleClick} />
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen} noteToDisplay={noteToDisplay} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
-        {notes?.filter(isValidJson)?.map((note: { body: string }) => (
-          <TextNote body={note.body} />
+        {notes?.filter(isValidJson)?.map((note: { id: string, body: string }) => (
+          <TextNote key={note.id} body={note.body} />
         ))}
       </div>
     </div>
