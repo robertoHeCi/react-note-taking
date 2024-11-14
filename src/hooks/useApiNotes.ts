@@ -17,11 +17,21 @@ export const useApiNotes = () => {
     },
   });
 
+  const updateNoteMutation = useMutation({
+    mutationFn: apiService.updateNote,
+    onSuccess: () => {
+      // Invalidate and refetch notes after update
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
+
   return {
     notes,
     isLoading,
     error,
     createNote: createNoteMutation.mutate,
     isCreating: createNoteMutation.isPending,
+    updateNote: updateNoteMutation.mutate,
+    isUpdating: updateNoteMutation.isPending,
   };
 }; 
