@@ -63,5 +63,32 @@ describe("apiService", () => {
         "Failed to create note"
       );
     });
+
+
+    it("should update a note successfully", async () => {
+      const editedNote = { title: "Edited note", content: "Edited note", updatedAt: "2024-11-13T00:00:00.000Z" };
+
+      server.use(
+        http.put(`${import.meta.env.VITE_API_URL}/notes/1`, () => {
+          return HttpResponse.json({ id: "1", body: JSON.stringify(editedNote) });
+        })
+      );
+
+      const updatedNote = await apiService.updateNote({ id: "1", ...editedNote });
+      expect(updatedNote).toHaveProperty("id");
+      expect(updatedNote.body).toBe(JSON.stringify(editedNote));
+    }); 
+
+    it("should throw error when update fails", async () => {
+      const editedNote = { title: "Edited note", content: "Edited note", updatedAt: "2024-11-13T00:00:00.000Z" };
+
+      server.use(
+        http.put(`${import.meta.env.VITE_API_URL}/notes/1`, () => {
+          return HttpResponse.json({ error: "Network error" }, { status: 400 });
+        })
+      );
+
+      await expect(apiService.updateNote({ id: "1", ...editedNote })).rejects.toThrow("Failed to update note");
+    }); 
   });
 });
