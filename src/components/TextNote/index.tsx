@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AutoSaveIcon, LoadingIcon } from "../Icons";
 import { useForm } from "react-hook-form";
 import { useApiNotes } from "@/hooks/useApiNotes";
