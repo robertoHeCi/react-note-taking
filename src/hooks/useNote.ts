@@ -1,35 +1,37 @@
 import { useState } from "react";
 
-export type NoteType = {
-  type: string;
-  content: string;
-}
 
 const useNote = () => {
-  const [noteToDisplay, setNoteToDisplay] = useState<NoteType | null>(null);
+  const [noteTypeToDisplay, setNoteTypeToDisplay] = useState<Notes.Types.TextNote | null>(null);
 
-  const noteType: NoteType[] = [
+  const noteType: Notes.Types.TextNote[] = [
     {
       type: 'text',
+      title: "Text Note Title",
       content: "Text Note Content",
+      updatedAt: new Date().toISOString(),
     },
     {
       type: 'image',
+      title: "Image Note Title",
       content: "Image Note Content",
+      updatedAt: new Date().toISOString(),
     },
     {
       type: 'check',
+      title: "Check Note Title",
       content: "Check Note Content",
+      updatedAt: new Date().toISOString(),
     },
   ]
 
-  const setNoteToDisplayByType = (type: string) => {
+  const setNoteTypeToDisplayByType = (type: string) => {
     const note = noteType.find((note) => note.type === type);
     if (note) {
-      setNoteToDisplay(note);
+      setNoteTypeToDisplay(note);
     }
   }
-  return { noteToDisplay, setNoteToDisplayByType };
+  return { noteTypeToDisplay, setNoteTypeToDisplayByType };
 }
 
 export default useNote;
