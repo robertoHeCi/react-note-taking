@@ -7,10 +7,13 @@ describe('Modal Component', () => {
   const mockProps = {
     isOpen: true,
     setIsOpen: vi.fn(),
-    noteToDisplay: {
+    isEditMode: false,
+    noteTypeToDisplay: {
       id: '1',
       type: 'text',
-      content: 'Test content'
+      title: 'Test title',
+      content: 'Test content',
+      updatedAt: '2024-11-13T00:00:00.000Z'
     }
   };
 
