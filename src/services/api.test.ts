@@ -25,6 +25,14 @@ describe("apiService", () => {
 
   describe("getNoteById", () => {
     it("should fetch a single note successfully", async () => {
+      const newNote = { id: 1, body: JSON.stringify({ title: "New note 1", content: "New note", updatedAt: "2024-11-13T00:00:00.000Z" }) };
+
+      server.use(
+        http.get(`${import.meta.env.VITE_API_URL}/notes/1`, () => {
+          return HttpResponse.json({ id: "1", body: JSON.stringify(newNote) });
+        })
+      );
+
       const note = await apiService.getNoteById("1");
       expect(note).toHaveProperty("id", "1");
       expect(note).toHaveProperty("body");
