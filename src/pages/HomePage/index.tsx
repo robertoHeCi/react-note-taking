@@ -1,59 +1,50 @@
-import ErrorMessage from "@/components/ErrorMessage";
-import { LoadingIcon } from "@/components/Icons";
 import Modal from "@/components/Modal";
-import TextNote from "@/components/TextNote";
+import { NotesList } from "@/components/NotesList";
+import CreateForm from "@/components/NoteTextForm/components/CreateForm";
+import EditForm from "@/components/NoteTextForm/components/EditForm";
 import Toolbar from "@/components/Toolbar";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { useModal } from "@/hooks/useModal";
-import useNote from "@/hooks/useNote";
-import { isValidJson } from "@/utils/isValidJSON";
-import { parseNote } from "@/utils/parseNote";
-import { useState } from "react";
+import { SubmitHandler, useFormContext } from "react-hook-form";
 
 const HomePage = () => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const { isModalOpen, setIsModalOpen } = useModal();
-  const { noteTypeToDisplay, setNoteTypeToDisplayByType } = useNote();
-  const [noteToDisplay, setNoteToDisplay] = useState<Notes.Types.TextNote>();
-  const { notes, error, isLoading } = useApiNotes();
-
-  const parsedNotes = notes?.filter(isValidJson)?.map(parseNote);
+  const { isModalOpen, isEditMode, openCreateMode, openEditMode, noteToDisplay, onCloseModal } = useModal({ setNoteTypeToDisplayByType: () => { } });
+  const { createNote, updateNote } = useApiNotes();
+  const { handleSubmit } = useFormContext<Notes.Types.TextNote>();
 
 
-  const handleCreateClick = (type: string) => {
-    setIsEditMode(false);
-    setNoteTypeToDisplayByType(type);
-    setIsModalOpen(!isModalOpen);
+  const onCreateSubmit: SubmitHandler<Notes.Types.TextNote> = (data: Notes.Types.TextNote) => {
+    if (data.title || data.content) {
+      createNote({ ...data, type: 'text' });
+    }
   }
 
-  const handleEditClick = (note: Notes.Types.TextNote) => {
-    setIsEditMode(true);
-    setNoteToDisplay(note);
-    setIsModalOpen(!isModalOpen);
+  const onEditSubmit: SubmitHandler<Notes.Types.TextNote> = (data: Notes.Types.TextNote) => {
+    updateNote({ ...noteToDisplay, ...data });
+  }
+
+
+  const onSubmit = async () => {
+    if (!isEditMode) {
+      await handleSubmit(onCreateSubmit)();
+    } else {
+      await handleSubmit(onEditSubmit)();
+    }
   }
 
   return (
     <div className="flex flex-col items-center justify-start h-screen pt-5">
-      <Toolbar handleClick={handleCreateClick} />
+      <Toolbar handleClick={openCreateMode} />
       <Modal
         isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-        isEditMode={isEditMode}
-        {...noteTypeToDisplay && { noteTypeToDisplay }}
-        {...noteToDisplay && { note: noteToDisplay }}
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
-        {parsedNotes?.map((note: Notes.Types.TextNote) => (
-          <TextNote key={note.id} note={note} onClick={handleEditClick} />
-        ))}
-      </div>
-      {error && <ErrorMessage error={error.message} />}
-      {isLoading && <div className="flex items-center justify-center">
-        <LoadingIcon /> <p className="ml-2">Loading notes...</p>
-      </div>}
-    </div>
+        onCloseModal={() => onCloseModal(onSubmit)}
+      >
+        {!isEditMode && <CreateForm />}
+        {isEditMode && <EditForm onSubmit={handleSubmit(onSubmit)} note={noteToDisplay as Notes.Types.TextNote} />}
+      </Modal>
+      <NotesList onNoteClick={openEditMode} />
+    </div >
   )
 }
 
 export default HomePage;
-
