@@ -7,7 +7,7 @@ import './index.css'
 const queryClient = new QueryClient();
 
 
-if (import.meta.env.VITE_ENV === 'development') {
+if (import.meta.env.MODE === 'development') {
   const { browserServer } = await import('./tests/mocks/browser/browser.ts');
   console.log("Starting MSW worker");
   browserServer.start();
