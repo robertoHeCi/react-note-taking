@@ -1,7 +1,5 @@
 import { http, HttpResponse } from 'msw';
 
-console.log(import.meta.env.VITE_API_URL, 'api');
-
 export const handlers = [
   http.get(`${import.meta.env.VITE_API_URL}/notes`, () => {
     return HttpResponse.json([
