@@ -6,7 +6,10 @@ export const useApiNotes = () => {
 
   const { data: notes, isLoading, error } = useQuery({
     queryKey: ['notes'],
-    queryFn: apiService.getNotes,
+    queryFn: async () => {
+      const result = await apiService.getNotes();
+      return result ?? [];
+    },
   });
 
   const createNoteMutation = useMutation({
