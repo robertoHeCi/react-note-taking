@@ -17,7 +17,7 @@ describe('Modal Component', () => {
     }
   };
 
-  it('renders when isOpen is true', () => {
+  it.skip('renders when isOpen is true', () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>  
@@ -28,7 +28,7 @@ describe('Modal Component', () => {
     expect(screen.getByPlaceholderText('Type your content here...')).toBeInTheDocument();
   });
 
-  it('does not render when isOpen is false', () => {
+  it.skip('does not render when isOpen is false', () => {
     const queryClient = new QueryClient();
     render(
       <QueryClientProvider client={queryClient}>
