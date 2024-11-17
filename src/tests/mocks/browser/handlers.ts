@@ -12,6 +12,10 @@ const data: Api.Note[] = [
   {
     id: 2,
     body: '{"title":"New note SW 2 ","type":"text","id":0,"updatedAt":"2024-11-15T19:00:40.530Z","content":"aasdsdfasdfa"}'
+  },
+  {
+    id: 3,
+    body: '{"title":"New note SW 3 ","type":"todo","id":0,"updatedAt":"2024-11-15T19:00:40.530Z","content":[{"title":"New note SW 3 ","completed":true},{"title":"New note SW 3 ","completed":false}]}'
   }
 ];
 
