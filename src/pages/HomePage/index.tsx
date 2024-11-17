@@ -9,7 +9,7 @@ import { SubmitHandler, useFormContext } from "react-hook-form";
 
 const HomePage = () => {
   const { isModalOpen, isEditMode, openCreateMode, openEditMode, noteToDisplay, onCloseModal } = useModal({ setNoteTypeToDisplayByType: () => { } });
-  const { createNote, updateNote } = useApiNotes();
+  const { createNote, updateNote, isUpdating } = useApiNotes();
   const { handleSubmit } = useFormContext<Notes.Types.TextNote>();
 
 
@@ -40,7 +40,11 @@ const HomePage = () => {
         onCloseModal={() => onCloseModal(onSubmit)}
       >
         {!isEditMode && <CreateForm />}
-        {isEditMode && <EditForm onSubmit={handleSubmit(onSubmit)} note={noteToDisplay as Notes.Types.TextNote} />}
+        {isEditMode && <EditForm
+          onSubmit={handleSubmit(onSubmit)}
+          note={noteToDisplay as Notes.Types.TextNote}
+          isUpdating={isUpdating}
+        />}
       </Modal>
       <NotesList onNoteClick={openEditMode} />
     </div >
