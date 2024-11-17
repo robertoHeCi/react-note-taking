@@ -1,4 +1,4 @@
-import { TextIcon, CheckIcon, ImageIcon } from '../Icons';
+import { TextIcon, ImageIcon, CheckBoxIcon } from '../Icons';
 
 const toolbarButtons = [
   {
@@ -8,7 +8,7 @@ const toolbarButtons = [
   },
   {
     id: 'check',
-    icon: CheckIcon,
+    icon: CheckBoxIcon,
     className: 'border-t border-b',
   },
   {

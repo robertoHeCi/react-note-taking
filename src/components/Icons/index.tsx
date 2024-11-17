@@ -11,7 +11,7 @@ const ImageIcon = () => {
   </svg>
 }
 
-const CheckIcon = () => {
+const CheckBoxIcon = () => {
   return <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -28,7 +28,7 @@ const CheckIcon = () => {
 }
 
 const LightIcon = () => {
-  return <svg aria-label="light-icon"  className="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  return <svg aria-label="light-icon" className="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
     <path fillRule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clipRule="evenodd" />
   </svg>
 }
@@ -55,6 +55,14 @@ const AutoSaveIcon = () => {
   </svg>
 }
 
+const CheckIcon = () => {
+  return <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+    stroke="currentColor" strokeWidth="1">
+    <path fillRule="evenodd"
+      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+      clipRule="evenodd"></path>
+  </svg>
+}
 
 
-export { TextIcon, ImageIcon, CheckIcon, LightIcon, DarkIcon, AutoSaveIcon, LoadingIcon };
+export { TextIcon, ImageIcon, CheckBoxIcon, LightIcon, DarkIcon, AutoSaveIcon, LoadingIcon, CheckIcon };
