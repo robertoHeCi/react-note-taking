@@ -1,9 +1,10 @@
-import TextNote from "@/components/TextNote";
+import TextNote from "@/components/NotesList/components/TextNote";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { isValidJson } from "@/utils/isValidJSON";
 import { parseNote } from "@/utils/parseNote";
 import ErrorMessage from "../ErrorMessage";
 import { LoadingIcon } from "../Icons";
+import TodoListNote from "./components/TodoListNote/Index";
 
 
 interface NotesListProps {
@@ -18,12 +19,15 @@ export const NotesList = ({ onNoteClick }: NotesListProps) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
-        {parsedNotes?.map((note: Notes.Types.TextNote) => (
-          <TextNote
+        {parsedNotes?.map((note: Notes.Types.TextNote | Notes.Types.TodoListNote) => (
+          note.type === 'text' ? <TextNote
             key={note.id}
-            note={note}
-            onClick={() => onNoteClick(note)}
-          />
+            note={note as Notes.Types.TextNote}
+            onClick={() => onNoteClick(note as Notes.Types.TextNote)}
+          /> : note.type === 'todo' ? <TodoListNote
+            key={note.id}
+            note={note as Notes.Types.TodoListNote}
+          /> : null
         ))}
       </div>
       <div className="flex flex-col items-center justify-center w-full">
