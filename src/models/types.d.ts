@@ -7,7 +7,14 @@ declare namespace Notes.Types {
     type: string;
   };
 
-  type NewTextNote = {
+  type TodoListNote = {
+    id?: string;
+    title: string;
+    content: {
+      title: string;  
+      completed: boolean;
+    }[];
+    updatedAt?: string;
     type: string;
   };
 }
