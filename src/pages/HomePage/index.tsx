@@ -38,7 +38,6 @@ const HomePage = () => {
         isOpen={isModalOpen}
         onCloseModal={() => onCloseModal(onSubmit)}
       >
-        <p>{noteTypeToDisplay}</p>
         {!isEditMode && noteTypeToDisplay === 'text' && <CreateForm />}
         {!isEditMode && noteTypeToDisplay === 'todo' && <CreateTodoNoteForm />}
         {isEditMode && noteToDisplay?.type === 'text' && <EditForm
