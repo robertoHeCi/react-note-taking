@@ -1,6 +1,6 @@
 import { formatDate } from "@/utils/formatDate";
 
-const TextNote = ({ note, onClick }: { note: Notes.Types.TextNote, onClick: (note: Notes.Types.TextNote) => void }) => {
+const TextNoteSummary = ({ note, onClick }: { note: Notes.Types.TextNote, onClick: (note: Notes.Types.TextNote) => void }) => {
 
   return (
     <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer" onClick={() => onClick(note)}>
@@ -15,4 +15,4 @@ const TextNote = ({ note, onClick }: { note: Notes.Types.TextNote, onClick: (not
   )
 }
 
-export default TextNote;
+export default TextNoteSummary;

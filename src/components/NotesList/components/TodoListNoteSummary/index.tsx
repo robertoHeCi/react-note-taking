@@ -1,6 +1,6 @@
 import { CheckIcon } from "@/components/Icons";
 
-const TodoListNote = ({ note }: { note: Notes.Types.TodoListNote }) => {
+const TodoListNoteSummary  = ({ note }: { note: Notes.Types.TodoListNote }) => {
   const formattedDate = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
   return <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer">
@@ -12,8 +12,6 @@ const TodoListNote = ({ note }: { note: Notes.Types.TodoListNote }) => {
       <ul className="flex flex-col gap-2 pt-2">
         {note.content.map((item, index) => (
           <li className="flex items-center">
-            {/* <input checked={item.completed} name={`checkbox-${index}`} readOnly type="checkbox" className="peer h-5 w-5 cursor-pointer transition-all dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800" id={`checkbox-${index}`} /> */}
-
             <label className="flex items-center cursor-pointer relative" htmlFor={`checkbox-${index}`}>
               <input type="checkbox"
                 checked={item.completed}
@@ -35,4 +33,4 @@ const TodoListNote = ({ note }: { note: Notes.Types.TodoListNote }) => {
   </div>
 }
 
-export default TodoListNote;
+export default TodoListNoteSummary;
