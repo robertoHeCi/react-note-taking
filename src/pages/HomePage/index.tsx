@@ -1,5 +1,6 @@
-import CreateForm from "@/components/CreateForm";
-import EditForm from "@/components/EditForm";
+import CreateForm from "@/components/CreateTextNoteForm";
+import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
+import EditForm from "@/components/EditTextNoteForm";
 import Modal from "@/components/Modal";
 import { NotesList } from "@/components/NotesList";
 import Toolbar from "@/components/Toolbar";
@@ -8,15 +9,13 @@ import { useModal } from "@/hooks/useModal";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
 const HomePage = () => {
-  const { isModalOpen, isEditMode, openCreateMode, openEditMode, noteToDisplay, onCloseModal } = useModal({ setNoteTypeToDisplayByType: () => { } });
-  const { createNote, updateNote, isUpdating } = useApiNotes();
+  const { isModalOpen, isEditMode, openCreateMode, openEditMode, noteToDisplay, onCloseModal, noteTypeToDisplay } = useModal();
+  const { createNote, updateNote } = useApiNotes();
   const { handleSubmit } = useFormContext<Notes.Types.TextNote>();
 
 
   const onCreateSubmit: SubmitHandler<Notes.Types.TextNote> = (data: Notes.Types.TextNote) => {
-    if (data.title || data.content) {
-      createNote({ ...data, type: 'text' });
-    }
+    createNote({ ...data, type: noteTypeToDisplay as string });
   }
 
   const onEditSubmit: SubmitHandler<Notes.Types.TextNote> = (data: Notes.Types.TextNote) => {
@@ -39,12 +38,17 @@ const HomePage = () => {
         isOpen={isModalOpen}
         onCloseModal={() => onCloseModal(onSubmit)}
       >
-        {!isEditMode && <CreateForm />}
-        {isEditMode && <EditForm
+        <p>{noteTypeToDisplay}</p>
+        {!isEditMode && noteTypeToDisplay === 'text' && <CreateForm />}
+        {!isEditMode && noteTypeToDisplay === 'todo' && <CreateTodoNoteForm />}
+        {isEditMode && noteToDisplay?.type === 'text' && <EditForm
           onSubmit={handleSubmit(onSubmit)}
           note={noteToDisplay as Notes.Types.TextNote}
-          isUpdating={isUpdating}
         />}
+        {/* {isEditMode && noteToDisplay?.type === 'todo' && <EditTodoNoteForm
+          onSubmit={handleSubmit(onSubmit)}
+          note={noteToDisplay as Notes.Types.TodoListNote}
+        />} */}
       </Modal>
       <NotesList onNoteClick={openEditMode} />
     </div >

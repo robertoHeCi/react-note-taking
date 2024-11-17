@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-export const useModal = ({ setNoteTypeToDisplayByType }: { setNoteTypeToDisplayByType: (type: string) => void }) => {
+export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [noteTypeToDisplay, setNoteTypeToDisplay] = useState<string>('');
   const [noteToDisplay, setNoteToDisplay] = useState<Notes.Types.TextNote>();
   const { reset } = useFormContext<Notes.Types.TextNote>();
 
 
   const openCreateMode = (type: string) => {
     setIsEditMode(false);
-    setNoteTypeToDisplayByType(type);
+    setNoteTypeToDisplay(type);
     setIsModalOpen(!isModalOpen);
   }
 
@@ -26,5 +27,5 @@ export const useModal = ({ setNoteTypeToDisplayByType }: { setNoteTypeToDisplayB
     reset();
   }
 
-  return { isModalOpen, setIsModalOpen, isEditMode, openCreateMode, openEditMode, noteToDisplay, onCloseModal };
+  return { isModalOpen, setIsModalOpen, isEditMode, openCreateMode, openEditMode, noteTypeToDisplay, noteToDisplay, onCloseModal };
 };
