@@ -5,8 +5,8 @@ import { parseNote } from "@/utils/parseNote";
 import ErrorMessage from "../ErrorMessage";
 import { LoadingIcon } from "../Icons";
 import TodoListNoteSummary from "@/components/NotesList/components/TodoListNoteSummary";
-interface NotesListProps {
-  onNoteClick: (note: Notes.Types.TextNote) => void;
+type NotesListProps = {
+  onNoteClick: (note: Notes.Types.TextNote | Notes.Types.TodoListNote ) => void;
 }
 
   const NotesList = ({ onNoteClick }: NotesListProps) => {
@@ -25,6 +25,7 @@ interface NotesListProps {
           /> : note.type === 'todo' ? <TodoListNoteSummary
             key={note.id}
             note={note as Notes.Types.TodoListNote}
+            onClick={() => onNoteClick(note as Notes.Types.TodoListNote)}
           /> : null
         ))}
       </div>

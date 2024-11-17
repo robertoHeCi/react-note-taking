@@ -1,6 +1,7 @@
 import CreateForm from "@/components/CreateTextNoteForm";
 import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
 import EditForm from "@/components/EditTextNoteForm";
+import EditTodoNoteForm from "@/components/EditTodoNoteForm ";
 import Modal from "@/components/Modal";
 import NotesList from "@/components/NotesList";
 import Toolbar from "@/components/Toolbar";
@@ -44,10 +45,10 @@ const HomePage = () => {
           onSubmit={handleSubmit(onSubmit)}
           note={noteToDisplay as Notes.Types.TextNote}
         />}
-        {/* {isEditMode && noteToDisplay?.type === 'todo' && <EditTodoNoteForm
+        {isEditMode && noteToDisplay?.type === 'todo' && <EditTodoNoteForm
           onSubmit={handleSubmit(onSubmit)}
           note={noteToDisplay as Notes.Types.TodoListNote}
-        />} */}
+              />}
       </Modal>
       <NotesList onNoteClick={openEditMode} />
     </div >

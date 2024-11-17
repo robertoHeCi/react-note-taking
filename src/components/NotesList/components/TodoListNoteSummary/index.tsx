@@ -1,9 +1,9 @@
 import { CheckIcon } from "@/components/Icons";
 
-const TodoListNoteSummary  = ({ note }: { note: Notes.Types.TodoListNote }) => {
+const TodoListNoteSummary  = ({ note, onClick }: { note: Notes.Types.TodoListNote, onClick: () => void  }) => {
   const formattedDate = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
-  return <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer">
+  return <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer" onClick={() => onClick(note)}>
     <div className="flex flex-col justify-between gap-1">
       <h4 className="text-gray-800 dark:text-gray-100 font-bold z-index-1">{note.title}</h4>
       <span className="text-xs text-transform: capitalize flex items-center dark:text-gray-400 text-gray-600">

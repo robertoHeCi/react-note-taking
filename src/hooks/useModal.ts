@@ -5,7 +5,7 @@ export const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [noteTypeToDisplay, setNoteTypeToDisplay] = useState<string>('');
-  const [noteToDisplay, setNoteToDisplay] = useState<Notes.Types.TextNote>();
+  const [noteToDisplay, setNoteToDisplay] = useState<Notes.Types.TextNote | Notes.Types.TodoListNote>();
   const { reset } = useFormContext<Notes.Types.TextNote>();
 
 
@@ -15,7 +15,7 @@ export const useModal = () => {
     setIsModalOpen(!isModalOpen);
   }
 
-  const openEditMode = (note: Notes.Types.TextNote) => {
+  const openEditMode = (note: Notes.Types.TextNote | Notes.Types.TodoListNote) => {
     setIsEditMode(true);
     setNoteToDisplay(note);
     setIsModalOpen(!isModalOpen);
