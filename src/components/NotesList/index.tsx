@@ -9,7 +9,7 @@ interface NotesListProps {
   onNoteClick: (note: Notes.Types.TextNote) => void;
 }
 
-export const NotesList = ({ onNoteClick }: NotesListProps) => {
+  const NotesList = ({ onNoteClick }: NotesListProps) => {
   const { notes, error, isLoading } = useApiNotes();
 
   const parsedNotes = notes?.filter(isValidJson)?.map(parseNote);
@@ -37,3 +37,5 @@ export const NotesList = ({ onNoteClick }: NotesListProps) => {
     </>
   );
 };
+
+export default NotesList;

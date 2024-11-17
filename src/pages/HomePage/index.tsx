@@ -2,7 +2,7 @@ import CreateForm from "@/components/CreateTextNoteForm";
 import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
 import EditForm from "@/components/EditTextNoteForm";
 import Modal from "@/components/Modal";
-import { NotesList } from "@/components/NotesList";
+import NotesList from "@/components/NotesList";
 import Toolbar from "@/components/Toolbar";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { useModal } from "@/hooks/useModal";
