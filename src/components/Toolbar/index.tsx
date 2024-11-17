@@ -7,7 +7,7 @@ const toolbarButtons = [
     className: 'rounded-s-lg border',
   },
   {
-    id: 'check',
+    id: 'todo',
     icon: CheckBoxIcon,
     className: 'border-t border-b',
   },
