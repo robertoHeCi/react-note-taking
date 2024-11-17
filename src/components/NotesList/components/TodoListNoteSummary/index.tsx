@@ -11,7 +11,7 @@ const TodoListNoteSummary  = ({ note, onClick }: { note: Notes.Types.TodoListNot
       </span>
       <ul className="flex flex-col gap-2 pt-2">
         {note.content.map((item, index) => (
-          <li className="flex items-center">
+          <li key={index} className="flex items-center">
             <label className="flex items-center cursor-pointer relative" htmlFor={`checkbox-${index}`}>
               <input type="checkbox"
                 checked={item.completed}
