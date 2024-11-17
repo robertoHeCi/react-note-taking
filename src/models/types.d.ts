@@ -7,13 +7,15 @@ declare namespace Notes.Types {
     type: string;
   };
 
+  type TodoItem = {
+    title: string;
+    completed: boolean;
+  }
+
   type TodoListNote = {
     id?: string;
     title: string;
-    content: {
-      title: string;  
-      completed: boolean;
-    }[];
+    content: TodoItem[];
     updatedAt?: string;
     type: string;
   };
