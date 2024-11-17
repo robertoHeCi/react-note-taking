@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useDebounce } from "@/hooks/useDebounce";
 import resizeTextarea from "@/utils/resizeTextArea";
 
-const EditForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.TextNote   }) => {
+const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.TextNote   }) => {
   const { register } = useFormContext();
   const contentRef = useRef<HTMLTextAreaElement | null>(null) as React.MutableRefObject<HTMLTextAreaElement | null>;
 
@@ -60,4 +60,4 @@ const EditForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.
   );
 };
 
-export default EditForm;
+export default EditTextNoteForm;

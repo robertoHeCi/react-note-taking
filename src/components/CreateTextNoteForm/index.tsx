@@ -2,7 +2,7 @@ import resizeTextarea from "@/utils/resizeTextArea";
 import { useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-const CreateForm = () => {
+const CreateTextNoteForm = () => {
   const { register } = useFormContext();
   const contentRef = useRef<HTMLTextAreaElement | null>(null) as React.MutableRefObject<HTMLTextAreaElement | null>;
 
@@ -44,4 +44,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default CreateTextNoteForm;
