@@ -1,4 +1,4 @@
-const resizeTextarea = (contentRef: React.MutableRefObject<HTMLTextAreaElement | null>) => {
+const resizeElement = (contentRef: React.MutableRefObject<HTMLTextAreaElement | HTMLDivElement | null>) => {
   if (!contentRef.current) return;
 
   contentRef.current.style.height = 'auto';
@@ -10,4 +10,4 @@ const resizeTextarea = (contentRef: React.MutableRefObject<HTMLTextAreaElement |
   contentRef.current.style.overflowY = newHeight > maxHeight ? 'auto' : 'hidden';
 };
 
-export default resizeTextarea;
+export default resizeElement;

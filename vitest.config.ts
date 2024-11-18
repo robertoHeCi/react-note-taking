@@ -6,7 +6,8 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     env: {
-      VITE_API_URL: "http://test-url.com"
+      VITE_API_URL: "http://test-url.com",
+      VITE_SESSION_ID: "test-2"
     },
     setupFiles: ["./src/tests/setup.ts"],
     globals: true
