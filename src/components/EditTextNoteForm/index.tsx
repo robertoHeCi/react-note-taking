@@ -1,29 +1,42 @@
 import { useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDebounce } from "@/hooks/useDebounce";
-import resizeTextarea from "@/utils/resizeTextArea";
+import resizeElement from "@/utils/resizeTextArea";
+import useMention from "@/hooks/useMention";
+import MentionModal from "../MentionModal";
 
-const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.TextNote   }) => {
-  const { register } = useFormContext();
-  const contentRef = useRef<HTMLTextAreaElement | null>(null) as React.MutableRefObject<HTMLTextAreaElement | null>;
-
+const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.TextNote }) => {
+  
+  const { register, setValue } = useFormContext();
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const { handleOnKeyUp, showMentions, onInsertMention, mentionQuery } = useMention({ contentRef });
   const { ref: registerRef, ...registerRest } = register("content");
 
   const { debouncedCallback } = useDebounce({
     delay: 1000,
     onDebounce: onSubmit
-  }); 
+  });
 
   useEffect(() => {
-    resizeTextarea(contentRef);
-    window.addEventListener('resize', () => resizeTextarea(contentRef));
-    return () => window.removeEventListener('resize', () => resizeTextarea(contentRef));
-  }, [contentRef.current?.value]);
+    if (contentRef.current) {
+      contentRef.current.focus();
+      contentRef.current.innerHTML = note.content;
+    }
+  }, []);
 
-  const handleSubmit = () => {
-    resizeTextarea(contentRef)
-    debouncedCallback();
+  useEffect(() => {
+    resizeElement(contentRef);
+    window.addEventListener('resize', () => resizeElement(contentRef));
+    return () => window.removeEventListener('resize', () => resizeElement(contentRef));
+  }, [contentRef.current?.innerHTML]);
+
+
+  const handleOnInput = (e: React.FormEvent<HTMLDivElement>) => {
+    resizeElement(contentRef);
+    setValue('content', e.currentTarget.innerHTML);
+    debouncedCallback()
   }
+
 
   return (
     <ul className="space-y-4">
@@ -34,27 +47,28 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
           {...register("title")}
           placeholder="Note title"
           defaultValue={note.title}
-          onKeyUp={debouncedCallback}
           onInput={debouncedCallback}
-          onPaste={debouncedCallback}
         />
       </li>
       <li>
-        <textarea
-          className="bg-transparent border-none dark:text-white text-sm rounded-lg focus:outline-none w-full resize-none min-h-10"
+        <div contentEditable="true"
           ref={(element) => {
             registerRef(element);
             contentRef.current = element;
           }}
+          data-id="content"
+          className="bg-transparent border-none dark:text-white text-sm rounded-lg focus:outline-none w-full resize-none min-h-10 p-3"
           {...registerRest}
-          rows={1}
-          placeholder="Type your content here..."
-          autoFocus
-          defaultValue={note.content}
-          onKeyUp={handleSubmit}
-          onInput={handleSubmit}
-          onPaste={handleSubmit}
+          onKeyUp={handleOnKeyUp}
+          onInput={handleOnInput}
         />
+        {showMentions && (
+          <MentionModal
+            query={mentionQuery}
+            insertMention={onInsertMention}
+            showMentions={showMentions}
+          />
+        )}
       </li>
     </ul>
   );
