@@ -99,4 +99,39 @@ describe("apiService", () => {
       await expect(apiService.updateNote({ id: "1", ...editedNote })).rejects.toThrow("Failed to update note");
     }); 
   });
+
+
+  describe("searchUsers", () => {
+    it("should search users successfully", async () => {
+
+      server.use(
+        http.get(`${import.meta.env.VITE_API_URL}/users`, () => {
+          return HttpResponse.json([{ id: "1", name: "John Doe", username: "johndoe" }, { id: "2", name: "Jane Doe", username: "janedoe" }]);
+        })
+      );
+      const users = await apiService.searchUsers("Doe");
+      expect(users).toHaveLength(2);
+    });
+
+    it("should search users successfully with partial match", async () => {
+
+      server.use(
+        http.get(`${import.meta.env.VITE_API_URL}/users`, () => {
+          return HttpResponse.json([{ id: "1", name: "John Doe", username: "johndoe" }, { id: "2", name: "Jane Doe", username: "janedoe" }]);
+        })
+      );
+      const users = await apiService.searchUsers("John");
+      expect(users).toHaveLength(1);
+    });
+
+    it("should return empty array if no users are found", async () => {
+      server.use(
+        http.get(`${import.meta.env.VITE_API_URL}/users`, () => {
+          return HttpResponse.json([{ id: "1", name: "John Doe", username: "johndoe" }, { id: "2", name: "Jane Doe", username: "janedoe" }]);
+        })
+      );
+      const users = await apiService.searchUsers("nonexistentuser");
+      expect(users).toEqual([]);
+    });
+  });
 });
