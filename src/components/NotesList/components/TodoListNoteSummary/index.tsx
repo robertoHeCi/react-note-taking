@@ -1,6 +1,11 @@
 import { CheckIcon } from "@/components/Icons";
 
-const TodoListNoteSummary  = ({ note, onClick }: { note: Notes.Types.TodoListNote, onClick: () => void  }) => {
+type TodoListNoteSummaryProps = {
+  note: Notes.Types.TodoListNote;
+  onClick: (note: Notes.Types.TodoListNote) => void;
+}
+
+const TodoListNoteSummary  = ({ note, onClick }: TodoListNoteSummaryProps) => {
   const formattedDate = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
   return <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer" onClick={() => onClick(note)}>
