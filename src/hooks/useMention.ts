@@ -32,11 +32,10 @@ const useMention = ({ contentRef }: MentionProps) => {
   const onInsertMention = (username: string) => {
     if (!contentRef.current || !mentionStartCursorPosition) return;
 
-    // Create the mention element
     const mentionSpan = document.createElement("span");
     mentionSpan.className =
       "capitalize dark:bg-red-500 bg-red-200 rounded-md px-1 py-0.5";
-    mentionSpan.contentEditable = "false"; // Make mention non-editable
+    mentionSpan.contentEditable = "false";
     mentionSpan.innerHTML = username;
 
     const newContent = contentRef.current.innerHTML.replace(
@@ -68,7 +67,7 @@ const useMention = ({ contentRef }: MentionProps) => {
 
       const queryText = content
         .slice(mentionStartCursorPosition, currentPosition)
-        .replace(/^\@/, "");
+        .replace(/^@/, "");
 
       setMentionQuery(queryText);
 
@@ -84,7 +83,8 @@ const useMention = ({ contentRef }: MentionProps) => {
     handleOnKeyUp,
     onInsertMention,
     showMentions,
-    mentionQuery
+    mentionQuery,
+    getCaretPosition
   };
 };
 

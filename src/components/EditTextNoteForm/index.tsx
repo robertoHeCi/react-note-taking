@@ -21,6 +21,7 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
     if (contentRef.current) {
       contentRef.current.focus();
       contentRef.current.innerHTML = note.content;
+      setValue('content', note.content);
     }
   }, []);
 
