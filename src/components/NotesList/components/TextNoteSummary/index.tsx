@@ -9,7 +9,8 @@ const TextNoteSummary = ({ note, onClick }: { note: Notes.Types.TextNote, onClic
         <span className="text-xs text-transform: capitalize flex items-center dark:text-gray-400 text-gray-600">
           Last update: {formatDate(note?.updatedAt)}
         </span>
-        <p className="text-gray-800 dark:text-gray-100 mt-4 text-sm overflow-hidden line-clamp-6 md:line-clamp-4 lg:line-clamp-6">{note.content}</p>
+        <p className="text-gray-800 dark:text-gray-100 mt-4 text-sm overflow-hidden line-clamp-6 md:line-clamp-4 lg:line-clamp-6"
+          dangerouslySetInnerHTML={{ __html: note.content }}></p>
       </div>
     </div>
   )
