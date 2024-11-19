@@ -46,9 +46,7 @@ const EditTodoNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
           placeholder="Note title"
           {...register("title", { required: 'Title is required' })}
           defaultValue={note.title}
-          onKeyUp={debouncedCallback}
-          onPaste={debouncedCallback}
-          onInput={debouncedCallback}
+          onChange={debouncedCallback}
         />
       </li>
       <li>
