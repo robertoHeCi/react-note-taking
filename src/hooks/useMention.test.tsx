@@ -19,7 +19,7 @@ describe('onInsertMention', () => {
     });
 
     act(() => {
-      result.current.handleOnKeyUp({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     contentRef.current.innerHTML = '@test';
@@ -39,11 +39,11 @@ describe('onInsertMention', () => {
     });
 
     act(() => {
-      result.current.handleOnKeyUp({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     act(() => {
-      result.current.handleOnKeyUp({ key: ' ' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: ' ' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     expect(result.current.showMentions).toBe(false);
@@ -57,7 +57,7 @@ describe('onInsertMention', () => {
     });
 
     act(() => {
-      result.current.handleOnKeyUp({ key: '@test' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@test' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     contentRef.current.innerHTML = '@test';
@@ -75,7 +75,7 @@ describe('onInsertMention', () => {
 
 
     act(() => {
-      result.current.handleOnKeyUp({ key: '@test3' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@test3' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     contentRef.current.innerHTML = '@test3';
@@ -95,7 +95,7 @@ describe('onInsertMention', () => {
 })
 
 
-describe('handleOnKeyUp', () => {
+describe('handleOnKeyDown', () => {
   // Mock contentRef
   const contentRef = {
     current: document.createElement('div')
@@ -135,7 +135,7 @@ describe('handleOnKeyUp', () => {
     });
 
     act(() => {
-      result.current.handleOnKeyUp({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     expect(result.current.showMentions).toBe(true);
@@ -148,13 +148,13 @@ describe('handleOnKeyUp', () => {
 
     // First show mentions
     act(() => {
-      result.current.handleOnKeyUp({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     // Then simulate backspace
     contentRef.current.innerHTML = 'test'; // Simulate removing @ symbol
     act(() => {
-      result.current.handleOnKeyUp({ key: 'Backspace' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: 'Backspace' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     expect(result.current.showMentions).toBe(false);
@@ -168,13 +168,13 @@ describe('handleOnKeyUp', () => {
 
     // Show mentions
     act(() => {
-      result.current.handleOnKeyUp({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: '@' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     // Simulate typing 'test'
     contentRef.current.textContent = '@test';
     act(() => {
-      result.current.handleOnKeyUp({ key: 't' } as React.KeyboardEvent<HTMLDivElement>);
+      result.current.handleOnKeyDown({ key: 't' } as React.KeyboardEvent<HTMLDivElement>);
     });
 
     waitFor(() => {

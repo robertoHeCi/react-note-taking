@@ -48,7 +48,13 @@ const useMention = ({ contentRef }: MentionProps) => {
     setValue('content', newContent);
   };
 
-  const handleOnKeyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
+
+  const onCompositionUpdate = (e: React.CompositionEvent<HTMLDivElement>) => {
+    console.log(e.data);
+    setShowMentions(true);
+  }
+
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "@") {
       const position = getCaretPosition();
       setShowMentions(true);
@@ -80,11 +86,12 @@ const useMention = ({ contentRef }: MentionProps) => {
   };
 
   return {
-    handleOnKeyUp,
+    handleOnKeyDown,
     onInsertMention,
     showMentions,
     mentionQuery,
-    getCaretPosition
+    getCaretPosition,
+    onCompositionUpdate
   };
 };
 
