@@ -65,13 +65,13 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
           onKeyDown={handleOnKeyDown}
           onInput={handleOnInput}
         />
-        {showMentions && (
-          <MentionModal
-            query={mentionQuery}
-            insertMention={onInsertMention}
-            showMentions={showMentions}
-          />
-        )}
+        {/* {showMentions && ( */}
+        <MentionModal
+          query={mentionQuery}
+          insertMention={onInsertMention}
+          showMentions={showMentions}
+        />
+        {/* )} */}
       </li>
     </ul>
   );
