@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { CheckIcon } from "../Icons";
+import { CheckIcon } from "../../Common/Icons";
 
 const CreateTextNoteForm = () => {
   const { register } = useFormContext();

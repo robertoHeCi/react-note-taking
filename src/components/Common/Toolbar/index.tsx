@@ -1,4 +1,4 @@
-import { TextIcon, CheckBoxIcon } from '../Icons';
+import { TextIcon, CheckBoxIcon } from '../Common/Icons';
 
 const toolbarButtons = [
   {

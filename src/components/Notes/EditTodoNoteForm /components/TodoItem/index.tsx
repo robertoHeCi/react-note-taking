@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { CheckIcon } from "@/components/Icons";
+import { CheckIcon } from "@/components/Common/Icons";
 
 type TodoItemProps = {
   item: Notes.Types.TodoItem;

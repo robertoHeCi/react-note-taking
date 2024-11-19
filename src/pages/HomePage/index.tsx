@@ -1,7 +1,7 @@
 import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
-import EditTodoNoteForm from "@/components/EditTodoNoteForm ";
-import Modal from "@/components/Modal";
-import NotesList from "@/components/NotesList";
+import EditTodoNoteForm from "@/components/Notes/EditTodoNoteForm ";
+import Modal from "@/components/Common/Modal";
+import NotesList from "@/components/Notes/NotesList";
 import Toolbar from "@/components/Toolbar";
 import UpsertTextNoteForm from "@/components/UpsertTextNoteForm";
 import { useApiNotes } from "@/hooks/useApiNotes";

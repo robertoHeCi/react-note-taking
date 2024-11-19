@@ -1,4 +1,4 @@
-import { CheckIcon } from "@/components/Icons";
+import { CheckIcon } from "@/components/Common/Icons";
 
 type TodoListNoteSummaryProps = {
   note: Notes.Types.TodoListNote;

@@ -1,10 +1,10 @@
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { isValidJson } from "@/utils/isValidJSON";
 import { parseNote } from "@/utils/parseNote";
-import ErrorMessage from "../ErrorMessage";
-import { LoadingIcon } from "../Icons";
+import ErrorMessage from "../../Common/ErrorMessage";
+import { LoadingIcon } from "../../Common/Icons";
 import sortNotesByDate from "@/utils/sortNotesByDate";
-import RenderNoteByType from "./components/RenderNoteByType";
+import RenderNoteByType from "./components/NoteTypeRenderer";
 type NotesListProps = {
   onNoteClick: (note: Notes.Types.TextNote | Notes.Types.TodoListNote) => void;
 }
