@@ -10,13 +10,20 @@ const useMention = ({ contentRef }: MentionProps) => {
     useState<number>(-1);
   const [mentionQuery, setMentionQuery] = useState<string>("");
   const [showMentions, setShowMentions] = useState<boolean>(false);
+  const [mentionPosition, setMentionPosition] = useState<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
 
-  const { setValue } = useFormContext();  
+  const { setValue } = useFormContext();
 
-  const getCaretPosition = () => {
+  const getCaretPositionAndCoordinates = (): {
+    position: number;
+    coordinates: { x: number; y: number };
+  } => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0 || !contentRef.current)
-      return -1;
+      return { position: -1, coordinates: { x: 0, y: 0 } };
 
     const range = selection.getRangeAt(0);
     const preCaretRange = range.cloneRange();
@@ -26,7 +33,16 @@ const useMention = ({ contentRef }: MentionProps) => {
     preCaretRange.setEnd(range.endContainer, range.endOffset);
 
     const position = preCaretRange.toString().length;
-    return position;
+    const rect = range.getBoundingClientRect();
+
+
+    return {
+      position,
+      coordinates:{
+        x: rect.left + window.scrollX,
+        y: rect.bottom + window.scrollY
+      }
+    };
   };
 
   const onInsertMention = (username: string) => {
@@ -45,14 +61,15 @@ const useMention = ({ contentRef }: MentionProps) => {
     contentRef.current.innerHTML = newContent;
 
     setShowMentions(false);
-    setValue('content', newContent);
+    setValue("content", newContent);
   };
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "@" || (contentRef.current?.innerHTML?.endsWith("@"))) {
-      const position = getCaretPosition();
+    if (e.key === "@" || contentRef.current?.innerHTML?.endsWith("@")) {
+      const { position, coordinates } = getCaretPositionAndCoordinates();
       setShowMentions(true);
       setMentionStartCursorPosition(position);
+      setMentionPosition(coordinates);
     } else if (e.key === "Backspace") {
       const match = contentRef.current?.innerHTML?.match(
         /(?<!<span[^>]*>.*?)(@(\w*))$/
@@ -77,11 +94,10 @@ const useMention = ({ contentRef }: MentionProps) => {
   return {
     handleOnKeyDown,
     onInsertMention,
-    showMentions,
+    getCaretPositionAndCoordinates,
     mentionQuery,
-    getCaretPosition,
-    setMentionQuery
-
+    mentionPosition,
+    showMentions
   };
 };
 

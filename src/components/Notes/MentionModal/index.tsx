@@ -1,10 +1,12 @@
 import { useUsers } from '@/hooks/useUsers';
 
-const MentionModal = ({ query, insertMention, showMentions }: { query: string, insertMention: (username: string) => void, showMentions: boolean }) => {
+const MentionModal = ({ query, insertMention, showMentions, position }: { query: string, insertMention: (username: string) => void, showMentions: boolean, position: { x: number, y: number } }) => {
   const { users, isLoading } = useUsers(showMentions ? query : "melany");
   return (
     <div
-      className="absolute z-10 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700"
+      className="fixed z-10 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-200 dark:border-gray-700"
+      {...position.y !== 0 && position.x !== 0 && { style: { top: position.y, left: position.x } }}
+      autoFocus
     >
       {isLoading ? (
         <div className="p-2 text-sm text-gray-500">Loading...</div>

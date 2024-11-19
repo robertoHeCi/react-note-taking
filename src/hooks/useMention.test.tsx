@@ -113,6 +113,10 @@ describe('handleOnKeyDown', () => {
           setEnd: vi.fn(),
           toString: vi.fn().mockReturnValue('test')
         }),
+        getBoundingClientRect: vi.fn().mockReturnValue({
+          left: 12,
+          bottom: 11
+        }),
         endContainer: document.createTextNode(''),
         endOffset: 0
       }),
@@ -204,7 +208,7 @@ describe('getCaretPosition', () => {
       wrapper: Wrapper
     });
 
-    expect(result.current.getCaretPosition()).toBe(-1);
+    expect(result.current.getCaretPositionAndCoordinates().position).toBe(-1);
   });
 
   it('should return -1 when there is no range', () => {
@@ -214,7 +218,7 @@ describe('getCaretPosition', () => {
       wrapper: Wrapper
     });
 
-    expect(result.current.getCaretPosition()).toBe(-1);
+    expect(result.current.getCaretPositionAndCoordinates().position).toBe(-1);
   });
 
   it('should return correct position for simple text', () => {
@@ -223,6 +227,10 @@ describe('getCaretPosition', () => {
       selectNodeContents: vi.fn(),
       setEnd: vi.fn(),
       toString: vi.fn().mockReturnValue('Hello'),
+      getBoundingClientRect: vi.fn().mockReturnValue({
+        left: 12,
+        bottom: 11
+      }),
       endContainer: document.createTextNode('Hello'),
       endOffset: 5
     };
@@ -236,7 +244,7 @@ describe('getCaretPosition', () => {
       wrapper: Wrapper
     });
 
-    expect(result.current.getCaretPosition()).toBe(5);
+    expect(result.current.getCaretPositionAndCoordinates().position).toBe(5);
   });
 
   it('should handle nested elements correctly', () => {
@@ -248,6 +256,10 @@ describe('getCaretPosition', () => {
       selectNodeContents: vi.fn(),
       setEnd: vi.fn(),
       toString: vi.fn().mockReturnValue('Hello World'),
+      getBoundingClientRect: vi.fn().mockReturnValue({
+        left: 12,
+        bottom: 11
+      }),
       endContainer: textNode,
       endOffset: 5
     };
@@ -261,7 +273,7 @@ describe('getCaretPosition', () => {
       wrapper: Wrapper
     });
 
-    expect(result.current.getCaretPosition()).toBe(11);
+    expect(result.current.getCaretPositionAndCoordinates().position).toBe(11);
   });
 
   it('should handle empty content', () => {
@@ -270,6 +282,10 @@ describe('getCaretPosition', () => {
       selectNodeContents: vi.fn(),
       setEnd: vi.fn(),
       toString: vi.fn().mockReturnValue(''),
+      getBoundingClientRect: vi.fn().mockReturnValue({
+        left: 12,
+        bottom: 11
+      }),
       endContainer: document.createTextNode(''),
       endOffset: 0
     };
@@ -283,6 +299,57 @@ describe('getCaretPosition', () => {
       wrapper: Wrapper
     });
 
-    expect(result.current.getCaretPosition()).toBe(0);
+    expect(result.current.getCaretPositionAndCoordinates().position).toBe(0);
+  });
+
+  it('should return coordinates when selection exists', () => {
+    const mockRange = {
+      cloneRange: vi.fn().mockReturnThis(),
+      selectNodeContents: vi.fn(),
+      setEnd: vi.fn(),
+      toString: vi.fn().mockReturnValue('test'),
+      getBoundingClientRect: vi.fn().mockReturnValue({
+        left: 100,
+        bottom: 200
+      }),
+      endContainer: document.createTextNode('test'),
+      endOffset: 4
+    };
+
+    window.getSelection = vi.fn().mockReturnValue({
+      rangeCount: 1,
+      getRangeAt: vi.fn().mockReturnValue(mockRange)
+    });
+    window.scrollX = 10;
+    window.scrollY = 10;
+
+    const { result } = renderHook(() => useMention({ contentRef }), {
+      wrapper: Wrapper
+    });
+
+    const { coordinates } = result.current.getCaretPositionAndCoordinates();
+    expect(coordinates).toEqual({ x: 110, y: 210 });
+  });
+
+  it('should return zero coordinates when no selection exists', () => {
+    window.getSelection = vi.fn().mockReturnValue(null);
+
+    const { result } = renderHook(() => useMention({ contentRef }), {
+      wrapper: Wrapper
+    });
+
+    const { coordinates } = result.current.getCaretPositionAndCoordinates();
+    expect(coordinates).toEqual({ x: 0, y: 0 });
+  });
+
+  it('should return zero coordinates when no range exists', () => {
+    window.getSelection = vi.fn().mockReturnValue({ rangeCount: 0 });
+
+    const { result } = renderHook(() => useMention({ contentRef }), {
+      wrapper: Wrapper
+    });
+
+    const { coordinates } = result.current.getCaretPositionAndCoordinates();
+    expect(coordinates).toEqual({ x: 0, y: 0 });
   });
 });

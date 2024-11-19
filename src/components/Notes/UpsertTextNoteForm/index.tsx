@@ -3,13 +3,13 @@ import { useFormContext } from "react-hook-form";
 import { useDebounce } from "@/hooks/useDebounce";
 import resizeElement from "@/utils/resizeTextArea";
 import useMention from "@/hooks/useMention";
-import MentionModal from "../MentionModal";
+import MentionModal from "@/components/Notes/MentionModal";
 
 const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: Notes.Types.TextNote }) => {
 
   const { register, setValue } = useFormContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { handleOnKeyDown, showMentions, onInsertMention, mentionQuery } = useMention({ contentRef });
+  const { handleOnKeyDown, onInsertMention, mentionQuery, mentionPosition, showMentions } = useMention({ contentRef });
   const { ref: registerRef, ...registerRest } = register("content");
 
   const { debouncedCallback } = useDebounce({
@@ -68,6 +68,7 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
         />
         {showMentions && (
           <MentionModal
+            position={mentionPosition}
             query={mentionQuery}
             insertMention={onInsertMention}
             showMentions={showMentions}
