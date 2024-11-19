@@ -1,4 +1,4 @@
-import { TextIcon, ImageIcon, CheckBoxIcon } from '../Icons';
+import { TextIcon, CheckBoxIcon } from '../Icons';
 
 const toolbarButtons = [
   {
@@ -9,13 +9,8 @@ const toolbarButtons = [
   {
     id: 'todo',
     icon: CheckBoxIcon,
-    className: 'border-t border-b',
-  },
-  {
-    id: 'image',
-    icon: ImageIcon,
     className: 'rounded-e-lg border',
-  }
+  },
 ];
 
 const Toolbar = ({ handleClick }: { handleClick: (type: string) => void }) => {
