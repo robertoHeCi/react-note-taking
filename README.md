@@ -11,10 +11,11 @@
 - [✅ Features](#features)
 - [💻 Technical Details](#technical-details)
 - [🛠️ Proposed Improvements](#proposed-improvements)
-- [🏃 Getting Started](#getting-started)
 - [🚀 Deployment](#deployment)
+- [🧪 Testing](#testing)
+- [🏃 Getting Started](#getting-started)
 
-## 👀  Overview
+## 👀 Overview
 A versatile note-taking application that allows users to create, manage, and organize different types of notes in an intuitive interface. 
 Built with modern web technologies and designed for both desktop and mobile use.
 
@@ -24,18 +25,17 @@ The project follows a straightforward folder structure designed to enhance maint
 ├── public/                # Static files like images and icons
 ├── src/                   # Source files for the application
 │   ├── components/        # Presentational components
+│   │   ├── Common/        # Shared components across the application
+│   │   └── Notes/         # Note-related components
 │   ├── hooks/             # Custom React hooks
 │   ├── layout/            # Layout components
 │   ├── models/            # TypeScript types using declare and namespaces
 │   ├── pages/             # Page components
 │   ├── services/          # API service calls
 │   ├── utils/             # Utility functions
+|   ├── test/              # Mock Service Worker (MSW) files for API request handling Automated and test setup configuration file
 │   └── App.tsx            # Main application component
-│   └── main.tsx            # App entry point
-├── test/                  # Automated tests
-│   ├── unit/              # Unit tests for individual components and functions
-│   ├── mocks/             # Mock Service Worker (MSW) files for API request handling
-│   └── setup.ts           # Test setup configuration file
+│   └── main.tsx           # App entry point
 ├── .env                   # Environment variables
 ├── .eslintrc.js           # ESLint configuration
 ├── package.json           # Project metadata and dependencies
@@ -174,13 +174,8 @@ The project is automatically deployed using Vercel's GitHub integration:
   - Custom hooks
   - State management
   - API integration
-- ✅ Component Tests
-  - Rendering behavior
-  - User interactions
-  - State changes
-  - Props validation
 - ✅ Integration Tests
-  - Note operations (create, edit, delete)
+  - Note operations (create, edit)
   - Data persistence
   - Error handling
 
