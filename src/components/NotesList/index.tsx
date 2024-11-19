@@ -1,32 +1,24 @@
-import TextNoteSummary from "@/components/NotesList/components/TextNoteSummary";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { isValidJson } from "@/utils/isValidJSON";
 import { parseNote } from "@/utils/parseNote";
 import ErrorMessage from "../ErrorMessage";
 import { LoadingIcon } from "../Icons";
-import TodoListNoteSummary from "@/components/NotesList/components/TodoListNoteSummary";
+import sortNotesByDate from "@/utils/sortNotesByDate";
+import RenderNoteByType from "./components/RenderNoteByType";
 type NotesListProps = {
-  onNoteClick: (note: Notes.Types.TextNote | Notes.Types.TodoListNote ) => void;
+  onNoteClick: (note: Notes.Types.TextNote | Notes.Types.TodoListNote) => void;
 }
 
-  const NotesList = ({ onNoteClick }: NotesListProps) => {
+const NotesList = ({ onNoteClick }: NotesListProps) => {
   const { notes, error, isLoading } = useApiNotes();
-
   const parsedNotes = notes?.filter(isValidJson)?.map(parseNote);
+  const sortedNotes = sortNotesByDate(parsedNotes);
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
-        {parsedNotes?.map((note: Notes.Types.TextNote | Notes.Types.TodoListNote) => (
-          note.type === 'text' ? <TextNoteSummary 
-            key={note.id}
-            note={note as Notes.Types.TextNote}
-            onClick={() => onNoteClick(note as Notes.Types.TextNote)}
-          /> : note.type === 'todo' ? <TodoListNoteSummary
-            key={note.id}
-            note={note as Notes.Types.TodoListNote}
-            onClick={() => onNoteClick(note as Notes.Types.TodoListNote)}
-          /> : null
+        {sortedNotes?.map((note: Notes.Types.TextNote | Notes.Types.TodoListNote) => (
+          <RenderNoteByType key={note.id} note={note} onClick={onNoteClick} />
         ))}
       </div>
       <div className="flex flex-col items-center justify-center w-full">
