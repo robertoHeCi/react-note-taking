@@ -10,10 +10,9 @@ const Modal = ({ children, isOpen, onCloseModal }: ModalProps) => {
     <>
       {isOpen && (
         <div
-          aria-hidden={isOpen ? "true" : "false"}
           className="overflow-y-auto fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50 sm:py-2 flex-col"
         >
-          <section className="p-10 pb-2 relative bg-white rounded-lg shadow dark:bg-gray-700 lg:w-1/2 lg:h-auto min-h-96 w-screen max-h-full animate-slide-up animate-duration-600 flex flex-col justify-between">
+          <section className="p-8 sm:p-6 pb-2 relative bg-white rounded-lg shadow dark:bg-gray-700 lg:w-1/2 lg:h-auto min-h-96 w-4/5 max-h-full animate-slide-up animate-duration-600 flex flex-col justify-between">
             {children}
             <button
               data-modal-hide="text-note-modal"
