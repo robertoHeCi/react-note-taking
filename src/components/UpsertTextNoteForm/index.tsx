@@ -23,10 +23,6 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
       if (note) {
         contentRef.current.innerHTML = note.content;
         setValue('content', note.content);
-      } else {
-        const defaultContent = 'Enter your note here...';
-        contentRef.current.innerHTML = defaultContent;
-        setValue('content', defaultContent);
       }
     }
   }, []);
@@ -69,7 +65,6 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
           onKeyUp={handleOnKeyDown}
           onInput={handleOnInput}
           onCompositionUpdate={onCompositionUpdate}
-          defaultValue={note?.content || 'Enter' }
         />
         {showMentions && (
           <MentionModal
