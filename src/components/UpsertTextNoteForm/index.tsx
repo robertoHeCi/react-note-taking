@@ -5,23 +5,29 @@ import resizeElement from "@/utils/resizeTextArea";
 import useMention from "@/hooks/useMention";
 import MentionModal from "../MentionModal";
 
-const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Notes.Types.TextNote }) => {
-  
+const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: Notes.Types.TextNote }) => {
+
   const { register, setValue } = useFormContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { handleOnKeyUp, showMentions, onInsertMention, mentionQuery } = useMention({ contentRef });
+  const { handleOnKeyDown, showMentions, onInsertMention, mentionQuery, onCompositionUpdate } = useMention({ contentRef });
   const { ref: registerRef, ...registerRest } = register("content");
 
   const { debouncedCallback } = useDebounce({
     delay: 1000,
-    onDebounce: onSubmit
+    onDebounce: onSubmit || (() => { })
   });
 
   useEffect(() => {
     if (contentRef.current) {
       contentRef.current.focus();
-      contentRef.current.innerHTML = note.content;
-      setValue('content', note.content);
+      if (note) {
+        contentRef.current.innerHTML = note.content;
+        setValue('content', note.content);
+      } else {
+        const defaultContent = 'Enter your note here...';
+        contentRef.current.innerHTML = defaultContent;
+        setValue('content', defaultContent);
+      }
     }
   }, []);
 
@@ -38,7 +44,6 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
     debouncedCallback()
   }
 
-
   return (
     <ul className="space-y-4">
       <li className="flex flex-col gap-2">
@@ -47,7 +52,7 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
           className="bg-transparent border-none text-gray-900 text-2xl font-bold dark:text-white focus:outline-none"
           {...register("title")}
           placeholder="Note title"
-          defaultValue={note.title}
+          defaultValue={note?.title}
           onInput={debouncedCallback}
         />
       </li>
@@ -58,10 +63,13 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
             contentRef.current = element;
           }}
           data-id="content"
-          className="bg-transparent border-none dark:text-white text-sm rounded-lg focus:outline-none w-full resize-none min-h-10 p-3"
+          className="bg-transparent border-2 border-slate-500 dark:text-white text-sm rounded-lg focus:outline-none w-full resize-none p-3"
+          style={{ minHeight: '100px' }}
           {...registerRest}
-          onKeyUp={handleOnKeyUp}
+          onKeyUp={handleOnKeyDown}
           onInput={handleOnInput}
+          onCompositionUpdate={onCompositionUpdate}
+          defaultValue={note?.content || 'Enter' }
         />
         {showMentions && (
           <MentionModal
@@ -75,4 +83,4 @@ const EditTextNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
   );
 };
 
-export default EditTextNoteForm;
+export default UpsertTextNoteForm;

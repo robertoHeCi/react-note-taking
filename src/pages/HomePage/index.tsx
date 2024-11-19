@@ -1,10 +1,9 @@
-import CreateForm from "@/components/CreateTextNoteForm";
 import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
-import EditForm from "@/components/EditTextNoteForm";
 import EditTodoNoteForm from "@/components/EditTodoNoteForm ";
 import Modal from "@/components/Modal";
 import NotesList from "@/components/NotesList";
 import Toolbar from "@/components/Toolbar";
+import UpsertTextNoteForm from "@/components/UpsertTextNoteForm";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { useModal } from "@/hooks/useModal";
 import { SubmitHandler, useFormContext } from "react-hook-form";
@@ -39,16 +38,16 @@ const HomePage = () => {
         isOpen={isModalOpen}
         onCloseModal={() => onCloseModal(onSubmit)}
       >
-        {!isEditMode && noteTypeToDisplay === 'text' && <CreateForm />}
+        {(noteToDisplay?.type === 'text' || noteTypeToDisplay === 'text') &&
+          <UpsertTextNoteForm
+            onSubmit={isEditMode ? () => handleSubmit(onEditSubmit)() : () => { }}
+            {...noteToDisplay && { note: noteToDisplay as Notes.Types.TextNote }}
+          />}
         {!isEditMode && noteTypeToDisplay === 'todo' && <CreateTodoNoteForm />}
-        {isEditMode && noteToDisplay?.type === 'text' && <EditForm
-          onSubmit={handleSubmit(onSubmit)}
-          note={noteToDisplay as Notes.Types.TextNote}
-        />}
         {isEditMode && noteToDisplay?.type === 'todo' && <EditTodoNoteForm
           onSubmit={handleSubmit(onSubmit)}
           note={noteToDisplay as Notes.Types.TodoListNote}
-              />}
+        />}
       </Modal>
       <NotesList onNoteClick={openEditMode} />
     </div >
