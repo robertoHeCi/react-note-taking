@@ -9,7 +9,7 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
 
   const { register, setValue } = useFormContext();
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { handleOnKeyDown, showMentions, onInsertMention, mentionQuery, onCompositionUpdate } = useMention({ contentRef });
+  const { handleOnKeyDown, showMentions, onInsertMention, mentionQuery } = useMention({ contentRef });
   const { ref: registerRef, ...registerRest } = register("content");
 
   const { debouncedCallback } = useDebounce({
@@ -62,9 +62,8 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
           className="bg-transparent border-2 border-slate-500 dark:text-white text-sm rounded-lg focus:outline-none w-full resize-none p-3"
           style={{ minHeight: '100px' }}
           {...registerRest}
-          onKeyUp={handleOnKeyDown}
+          onKeyDown={handleOnKeyDown}
           onInput={handleOnInput}
-          onCompositionUpdate={onCompositionUpdate}
         />
         {showMentions && (
           <MentionModal

@@ -48,12 +48,6 @@ const useMention = ({ contentRef }: MentionProps) => {
     setValue('content', newContent);
   };
 
-
-  const onCompositionUpdate = (e: React.CompositionEvent<HTMLDivElement>) => {
-    console.log(e.data);
-    setShowMentions(true);
-  }
-
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "@") {
       const position = getCaretPosition();
@@ -68,17 +62,12 @@ const useMention = ({ contentRef }: MentionProps) => {
         setMentionQuery("");
       }
     } else if (showMentions) {
-      const currentPosition = getCaretPosition();
-      const content = contentRef.current?.textContent || ""; // Using textContent instead of innerHTML
+      const mentionQueryValue = mentionQuery + e.key;
 
-      const queryText = content
-        .slice(mentionStartCursorPosition, currentPosition)
-        .replace(/^@/, "");
-
-      setMentionQuery(queryText);
+      setMentionQuery(mentionQueryValue.replace(/^@/, ""));
 
       // Hide mentions dropdown if user types a space
-      if (e.key === " " || queryText.includes(" ")) {
+      if (e.key === " " || mentionQueryValue.includes(" ")) {
         setShowMentions(false);
         setMentionQuery("");
       }
@@ -91,7 +80,8 @@ const useMention = ({ contentRef }: MentionProps) => {
     showMentions,
     mentionQuery,
     getCaretPosition,
-    onCompositionUpdate
+    setMentionQuery
+
   };
 };
 
