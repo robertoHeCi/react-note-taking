@@ -1,6 +1,6 @@
 import useTheme from "@/hooks/useTheme";
-import { DarkIcon } from "../Common/Icons";
-import { LightIcon } from "../Common/Icons";
+import { DarkIcon } from "@/components/Common/Icons";
+import { LightIcon } from "@/components/Common/Icons";
 
 
 const ThemeToggle = () => {

@@ -61,7 +61,7 @@ const EditTodoNoteForm = ({ onSubmit, note }: { onSubmit: () => void, note: Note
             />
           ))}
           <li className="flex items-center">
-            <button onClick={handleAddItem}>Add item</button>
+            <button onClick={handleAddItem} className="text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"> + Add item</button>
           </li>
         </ul>
       </li>

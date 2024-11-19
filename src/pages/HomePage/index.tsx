@@ -1,9 +1,9 @@
-import CreateTodoNoteForm from "@/components/CreateTodoNoteForm";
-import EditTodoNoteForm from "@/components/Notes/EditTodoNoteForm ";
+import CreateTodoNoteForm from "@/components/Notes/CreateTodoNoteForm";
+import EditTodoNoteForm from "@/components/Notes/EditTodoNoteForm";
 import Modal from "@/components/Common/Modal";
 import NotesList from "@/components/Notes/NotesList";
-import Toolbar from "@/components/Toolbar";
-import UpsertTextNoteForm from "@/components/UpsertTextNoteForm";
+import Toolbar from "@/components/Common/Toolbar";
+import UpsertTextNoteForm from "@/components/Notes/UpsertTextNoteForm";
 import { useApiNotes } from "@/hooks/useApiNotes";
 import { useModal } from "@/hooks/useModal";
 import { SubmitHandler, useFormContext } from "react-hook-form";
