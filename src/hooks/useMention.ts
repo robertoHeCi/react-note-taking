@@ -49,7 +49,7 @@ const useMention = ({ contentRef }: MentionProps) => {
   };
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "@") {
+    if (e.key === "@" || (contentRef.current?.innerHTML?.endsWith("@"))) {
       const position = getCaretPosition();
       setShowMentions(true);
       setMentionStartCursorPosition(position);
