@@ -64,6 +64,7 @@ const UpsertTextNoteForm = ({ onSubmit, note }: { onSubmit?: () => void, note?: 
           {...registerRest}
           onKeyDown={handleOnKeyDown}
           onInput={handleOnInput}
+          tabIndex={0}
         />
         {/* {showMentions && ( */}
         <MentionModal
