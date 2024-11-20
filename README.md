@@ -52,7 +52,7 @@ This structure helps in organizing the codebase logically, making it easier for 
 ## ✅ Features
 ### Core Features
 - Multiple note types support (Plain text, Todo lists)
-- @mention functionality in text notes
+- @mention functionality in text notes (desktop only due to mobile keyboard event handling limitations)
 - Automatic sorting by last updated
 - Responsive design for all devices
 - Dark/light mode support
@@ -140,6 +140,7 @@ This structured approach allows for easy parsing and manipulation of note data, 
 - [ ] Export/import functionality
 - [ ] Search functionality
 - [ ] Implement E2e testing (Cypress|Playright)
+- [ ] Improve testing
 
 ## 🚀 Deployment
 
