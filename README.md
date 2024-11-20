@@ -29,7 +29,7 @@ The project follows a straightforward folder structure designed to enhance maint
 │   │   └── Notes/         # Note-related components
 │   ├── hooks/             # Custom React hooks
 │   ├── layout/            # Layout components
-│   ├── models/            # TypeScript types using declare and namespaces
+│   ├── models/            # TypeScript type declarations using namespaces for Notes and User types
 │   ├── pages/             # Page components
 │   ├── services/          # API service calls
 │   ├── utils/             # Utility functions
@@ -40,7 +40,7 @@ The project follows a straightforward folder structure designed to enhance maint
 ├── .eslintrc.js           # ESLint configuration
 ├── package.json           # Project metadata and dependencies
 ├── pnpm-lock.yaml         # Lockfile for pnpm dependencies
-├── tsconfig.json          # TypeScript configuration file that references other tsconfig files
+├── tsconfig.json          # TypeScript configuration file that references other tsconfig files (app and specs)
 ├── tailwind.config.js     # Configuration file for Tailwind CSS, defining theme and styles
 ├── vite.config.ts         # Vite configuration file for building and serving the application
 └── vitest.config.ts       # Configuration file for Vitest, setting up the testing environment
@@ -57,16 +57,11 @@ This structure helps in organizing the codebase logically, making it easier for 
 - Responsive design for all devices
 - Dark/light mode support
 
-### User Interface
-- Modern, clean design using Tailwind CSS
-- Consistent styling across note types
-- Fully responsive layout
-
 ### Tech Stack
 - **Frontend Framework**: React with TypeScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
-- **Testing**: Vitest & React Testing Library
+- **Testing**: Vitest, React Testing Library and MSW to intercept requests
 
 ### Code analysis
 - **Husky**: Integrated to manage Git hooks easily, allowing for automated checks before commits and pushes. This ensures that code quality is maintained by running scripts for linting and testing, preventing bad code from being committed to the repository.
@@ -79,7 +74,8 @@ This structure helps in organizing the codebase logically, making it easier for 
 Notes are stored using the following API format:
 ```json
 {
-  "body": "..." // Contains the serialized note data
+  "id": 1,
+  "body": "..."
 }
 ```
 
@@ -95,7 +91,7 @@ For text type notes, we utilize the following JSON structure:
     "type": "text",
     "updated_at": "2024-11-15T19:00:40.530Z"
   },
-  "content": "Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sit amet faucibus tellus. AFJADKFJ <span class=\"capitalize dark:bg-red-500 bg-red-200 rounded-md px-1 py-0.5\" contenteditable=\"false\">sarah oliver</span>"
+  "content": "Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sit amet faucibus tellus. AFJADKFJ <span class=\"capitalize bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300\" contenteditable=\"false\">sarah oliver</span>"
 }
 ```
 
@@ -139,7 +135,7 @@ This structured approach allows for easy parsing and manipulation of note data, 
 - [ ] Collaborative editing
 - [ ] Export/import functionality
 - [ ] Search functionality
-- [ ] Implement E2e testing (Cypress|Playright)
+- [ ] Implement E2e testing (Cypress | Playright)
 - [ ] Improve testing
 
 ## 🚀 Deployment
@@ -173,7 +169,6 @@ The project is automatically deployed using Vercel's GitHub integration:
 - ✅ Unit Tests
   - Utility functions
   - Custom hooks
-  - State management
   - API integration
 - ✅ Integration Tests
   - Note operations (create, edit)
@@ -188,7 +183,7 @@ The project is automatically deployed using Vercel's GitHub integration:
 
 
 ### Mock Service Worker (MSW) Setup
-The application uses Mock Service Worker (MSW) to intercept network requests during development. This allows you to mock API responses without needing a live server. 
+The application uses Mock Service Worker (MSW) to intercept network requests during development and testing. This allows you to mock API responses without needing a live server. 
 
 - **Execution**: MSW will run in the development environment.
 - **HTTP URL Requirement**: Ensure that you have a valid HTTP URL configured in your `.env` file (e.g., `VITE_API_URL=http://localhost:3000`) to mock the server effectively.
@@ -223,7 +218,6 @@ pnpm install
 ```bash
 pnpm dev
 ```
-
 
 ### Available Commands
 
