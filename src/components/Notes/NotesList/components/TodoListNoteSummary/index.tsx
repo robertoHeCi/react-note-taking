@@ -9,12 +9,12 @@ const TodoListNoteSummary  = ({ note, onClick }: TodoListNoteSummaryProps) => {
   const formattedDate = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
   return <div className="w-full h-64 flex flex-col justify-between dark:bg-gray-800 bg-white dark:hover:border-gray-400 hover:shadow-md transition-all duration-300 dark:border-gray-700 rounded-lg border border-gray-200 mb-6 py-5 px-4 cursor-pointer" onClick={() => onClick(note)}>
-    <div className="flex flex-col justify-between gap-1">
+    <div className="flex flex-col justify-between gap-1 overflow-hidden line-clamp-6 md:line-clamp-4 lg:line-clamp-6" >
       <h4 className="text-gray-800 dark:text-gray-100 font-bold z-index-1">{note.title}</h4>
       <span className="text-xs text-transform: capitalize flex items-center dark:text-gray-400 text-gray-600">
         Last update: {formattedDate}
       </span>
-      <ul className="flex flex-col gap-2 pt-2">
+      <ul className="flex flex-col gap-2 pt-2 ">
         {note.content.map((item, index) => (
           <li key={index} className="flex items-center">
             <label className="flex items-center cursor-pointer relative" htmlFor={`checkbox-${index}`}>
