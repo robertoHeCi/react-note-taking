@@ -54,6 +54,10 @@ This structure helps in organizing the codebase logically, making it easier for 
 - Multiple note types support (Plain text, Todo lists)
 - @mention functionality in text notes (desktop only due to mobile keyboard event handling limitations)
 - Automatic sorting by last updated
+- Smart state management:
+  - Form state handling with React Hook Form
+  - Debounced auto-save for text and todo notes
+  - Optimistic updates for better UX
 - Responsive design for all devices
 - Dark/light mode support
 
@@ -61,6 +65,7 @@ This structure helps in organizing the codebase logically, making it easier for 
 - **Frontend Framework**: React with TypeScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
+- **Form Management**: React Hook Form for controlled inputs and form state
 - **Testing**: Vitest, React Testing Library and MSW to intercept requests
 
 ### Code analysis
