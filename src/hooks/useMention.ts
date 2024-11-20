@@ -35,7 +35,6 @@ const useMention = ({ contentRef }: MentionProps) => {
     const position = preCaretRange.toString().length;
     const rect = range.getBoundingClientRect();
 
-
     return {
       position,
       coordinates:{
@@ -50,7 +49,7 @@ const useMention = ({ contentRef }: MentionProps) => {
 
     const mentionSpan = document.createElement("span");
     mentionSpan.className =
-      "capitalize dark:bg-red-500 bg-red-200 rounded-md px-1 py-0.5";
+      "capitalize bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300";
     mentionSpan.contentEditable = "false";
     mentionSpan.innerHTML = username;
 
@@ -65,7 +64,7 @@ const useMention = ({ contentRef }: MentionProps) => {
   };
 
   const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "@" || contentRef.current?.innerHTML?.endsWith("@")) {
+    if (e.key === "@") {
       const { position, coordinates } = getCaretPositionAndCoordinates();
       setShowMentions(true);
       setMentionStartCursorPosition(position);
